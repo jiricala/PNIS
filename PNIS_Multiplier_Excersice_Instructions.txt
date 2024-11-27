@@ -1,0 +1,39 @@
+• Create directory for source code ./PNIS/SOURCE
+• Create directory for simulation ./PNIS/simulation
+• Define working simulation libraries in cds.lib:
+• DEFINE worklib ./PNIS/simulation/simulation/worklib
+• Chose working simulation library in hdl.var
+• DEFINE work worklib
+• Compile all modules, elaborate and run sim.
+• xmvlog –sv <filename.sv>
+• xmelab –access rwc –timescale 1ns/1ps <top module name>
+• bsub –Ip –q gui xmsim –gui <top module name>
+
+Simulation
+
+
+• Create directory ./PNIS/synthesis/run
+• Run design_vision
+• bsub –Ip –q gui design_vision –gui 
+• Read technology library
+• Execute Script … source libini_bcd8000L24HDS_typ.tcl
+• Read … 
+• read_file -library WORK -format sverilog {RTL file name}
+• Analyze … 
+• analyze -library WORK -format sverilog {RTL file name}
+• Link …. 
+• current_design <top module>
+• link
+
+Synthesis
+
+• Apply Constraints …
+• Compile … 
+• Check timing …
+• maximum operating frequency
+• processing latency
+• area
+• Export synthesized netlist …
+• write -format verilog -hierarchy –output <output file.v>
+
+
