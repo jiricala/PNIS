@@ -1,0 +1,31 @@
+How to perform synthesis in Cadence Genus tool: 
+ 
+Start new terminal don’t use existing one (configuration of project 
+must be reloaded) 
+ 
+setgroups – click on pnis group and confirm 
+prj_ddm pnis Digital_design_A0 – load pnis project configuration 
+ 
+bsub -Ip -q gui genus -gui -run genus 
+ 
+in genus command-line (terminal): 
+ 
+read_libs /sw/unicad/BCD8000L24HDS/5.0.a-00/libs/BCD8000L24HDS_nom_1.80V_25C.lib  
+ 
+read_hdl PNIS/SOURCE/multipliers/abstract_mult_seq.sv 
+ 
+
+
+elaborate abstract_multiplier    
+ 
+set clock [define_clock -period 10 -name CLK clk_i]  
+ 
+syn_gen -effort medium       
+ 
+syn_map -effort medium  
+ 
+report_area > area_report_txt 
+ 
+report_timing > timing_report.txt 
+ 
+write_netlist abstract_multiplier > abstract_mult_seq_synt.v
