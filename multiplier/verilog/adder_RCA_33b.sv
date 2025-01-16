@@ -10,7 +10,6 @@ module adder_RCA_33b(
     
     // ---------------------------------------
     
-    // internal signals
     logic [32:0] carry_out;
     logic [32:0] carry_in;
     

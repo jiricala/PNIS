@@ -29,8 +29,8 @@ module multiplier_seq(
     //--- INPUT DATA REGISTERS & SHIFT REGISTERS ------------------------------
     always @(posedge CLK or negedge RSTN) begin
         if (!RSTN) begin                            // async reset
-            din1_reg  <= DIN1_i;
-            din2_sreg <= DIN2_i;
+            din1_reg  <= 32'b0;
+            din2_sreg <= 32'b0;
             calc_sreg <= 64'b0;
         end else begin                              // clk posedge
             if (busy) begin
