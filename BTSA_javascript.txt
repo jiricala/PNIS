@@ -1,0 +1,60 @@
+/*
+9090        23 82                       2382
+Hello :)    48 65 6c 6c 6f 20 3a 29     48656c6c6f203a29
+0.123456    01 e2 40                    01e240
+
+AT+UTX 13<CR>238248656c6c6f203a2901e240
+
+*/
+
+function Decoder(bytes, port) { 
+  var number = (bytes[0] << 8) | bytes[1];
+  var message = ""; 
+  for(var i = 2; i < 10; i++) message += String.fromCharCode(bytes[i]); 
+  decoded.message = message; 
+  var float = (bytes[10] << 16 | bytes[11] << 8 | bytes[12]) / 1000000.0; 
+
+  var decoded = {
+    number:  number,
+    float:   float,
+    message: message
+  }; 
+
+  return decoded;
+} 
+
+
+
+
+/*
+Byte	Name	Type	multiple	unit
+0	HEADER	uint8		
+1	BATTERY	uint8	10	V
+2	ORIENTATION	uint8		
+3 - 4	TEMPERATURE	int16	10	°C
+5	HUMIDITY	uint8	2	%
+6 - 7	ILLUMINANCE	uint16		lux
+8 - 9	PRESSURE	uint16	0.5	Pa
+*/
+
+function Decoder(bytes, port) { 
+  var header = bytes[0];
+  var battery = bytes[1] / 10.0;
+  var orientation = bytes[2];
+  var temperature = ((bytes[3] << 8) | bytes[4]) / 10.0;
+  var humidity = bytes[5] / 2;
+  var illuminance = (bytes[6] << 8) | bytes[7];
+  var pressure = ((bytes[8] << 8) | bytes[9]) * 2.0;
+
+  var decoded = {
+    header:       header,
+    battery:      battery,
+    orientation:  orientation,
+    temperature:  temperature,
+    humidity:     humidity,
+    illuminance:  illuminance,
+    pressure:     pressure
+  };
+
+  return decoded; 
+} 
